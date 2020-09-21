@@ -71,7 +71,7 @@ const TransactionList = ({navigation}) => {
                 }
             }}/>
             <FlatList
-                style={{marginTop: 12}}
+                style={{paddingTop: 12}}
                 data={transactionList}
                 renderItem={({ item }) => <TransactionItem item={item} onPress={(item) => navigation.navigate('Details', {item: item})}/>}
                 keyExtractor={item => item.id}

@@ -15,10 +15,10 @@ const TransactionItem = ({item, onPress}) => {
             <View style={[styles.sideLine, isSuccess ? {backgroundColor: colors.secondary} : {backgroundColor: colors.primary}]}/>
             <View style={styles.details}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={{fontFamily: 'Lato-Black', fontSize: 16}}>{item.sender_bank}</Text>
+                    <Text style={{fontFamily: 'Lato-Black', fontSize: 14}}>{item.sender_bank.toUpperCase()}</Text>
                     {/* <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
                     <Image style={styles.arrowIcon}source={require('assets/icons/right-arrow.png')}/>
-                    <Text style={{fontFamily: 'Lato-Black', fontSize: 16}}>{item.beneficiary_bank}</Text>
+                    <Text style={{fontFamily: 'Lato-Black', fontSize: 14}}>{item.beneficiary_bank.toUpperCase()}</Text>
                 </View>
                 <Text style={{textTransform: 'uppercase', color: '#202020', ...styles.text}}>{item.beneficiary_name}</Text>
                 <View style={{flexDirection: 'row'}}>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     text: {
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: 'Lato-Semibold'
     }
 });

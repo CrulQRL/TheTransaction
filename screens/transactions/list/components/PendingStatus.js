@@ -12,12 +12,11 @@ const PendingStatus = ({style}) => {
 
 const styles = StyleSheet.create({
     label: {
-        alignSelf: 'baseline',
-        textAlignVertical: 'center',
         backgroundColor: '#ffffff',
+        textAlign: 'center',
         paddingVertical: 4,
-        paddingHorizontal: 8,
-        fontSize: 14,
+        paddingHorizontal: 6,
+        fontSize: 12    ,
         borderRadius: 6,
         color: '#000000',
         fontWeight: 'bold',

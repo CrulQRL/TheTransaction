@@ -23,10 +23,10 @@ const TransactionDetails = ({route, navigation}) => {
                     </TouchableOpacity>
                 </View> 
                 <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 16, marginBottom: 16}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.sender_bank}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.sender_bank.toUpperCase()}</Text>
                     {/* <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
                     <Image style={styles.arrowIcon}source={require('assets/icons/right-arrow.png')}/>
-                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.beneficiary_bank}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.beneficiary_bank.toUpperCase()}</Text>
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, marginBottom: 16}}>
                     <DetailItem title={item.beneficiary_name.toUpperCase()} subtitle={item.account_number}/>
