@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import colors from 'themes/Colors';
 
+import axios from 'axios';
 import SearchBar from 'components/SearchBar';
 import SortModal from './components/SortModal';
 import { SortType } from 'constants/index';
 import TransactionItem from './components/TransactionItem';
 import { searchTransactions, sortTransactions } from 'utils/transactions';
 
-const TransactionList = ({navigation}) => {
+const fetchTrans = async () => {
+    return await axios.get('https://nextar.flip.id/frontend-test')
+}
+
+const TransactionList = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [sortOption, setSortOption] = useState(SortType.default);
     const [responseList, setResponseList] = useState([]);
@@ -17,23 +22,40 @@ const TransactionList = ({navigation}) => {
 
 
     useEffect(() => {
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = e => {
-            if (request.readyState !== 4) {
-                return;
-            }
-            
-            if (request.status === 200) {
-                var transactions = Object.values(JSON.parse(request.responseText));
-                setResponseList(transactions);
-                setTransactionList(transactions);
-            } else {
-                console.warn(e);
-            }
-        };
+        // var request = new XMLHttpRequest();
+        // request.onreadystatechange = e => {
+        //     if (request.readyState !== 4) {
+        //         return;
+        //     }
 
-        request.open('GET', 'https://nextar.flip.id/frontend-test');
-        request.send();
+        //     if (request.status === 200) {
+        //         var transactions = Object.values(JSON.parse(request.responseText));
+        //         setResponseList(transactions);
+        //         setTransactionList(transactions);
+        //     } else {
+        //         console.warn(e);
+        //     }
+        // };
+
+        // request.open('GET', 'https://nextar.flip.id/frontend-test');
+        // request.send();
+
+
+        // axios.get('https://nextar.flip.id/frontend-test').then((res) => {
+        //     var transactions = Object.values(res.data);
+        //     setResponseList(transactions);
+        //     setTransactionList(transactions);
+        // })
+
+
+        async function doIt() {
+            var res = await fetchTrans()
+            var transactions = Object.values(res.data);
+            setResponseList(transactions);
+            setTransactionList(transactions);
+        }
+        doIt()
+
     }, []);
 
     useEffect(() => {
@@ -59,7 +81,7 @@ const TransactionList = ({navigation}) => {
                         return true;
                     }
                 })
-            }}/>
+            }} />
             <SortModal visible={modalVisible} selectedOption={sortOption} onSelected={(option) => {
                 setModalVisible(false);
                 if (option != -1) {
@@ -69,11 +91,11 @@ const TransactionList = ({navigation}) => {
                         }
                     });
                 }
-            }}/>
+            }} />
             <FlatList
-                style={{paddingTop: 12}}
+                style={{ paddingTop: 12 }}
                 data={transactionList}
-                renderItem={({ item }) => <TransactionItem item={item} onPress={(item) => navigation.navigate('Details', {item: item})}/>}
+                renderItem={({ item }) => <TransactionItem item={item} onPress={(item) => navigation.navigate('Details', { item: item })} />}
                 keyExtractor={item => item.id}
             />
         </SafeAreaView>
